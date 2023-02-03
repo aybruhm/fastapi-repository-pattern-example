@@ -8,7 +8,7 @@ from shortener.services import create_shortened_link, redirect_to_original_link
 
 
 # Initialize api router
-router = APIRouter(tags=["API"])
+router = APIRouter(tags=["API v1"])
 
 
 @router.post("/shorten/", status_code=201)
