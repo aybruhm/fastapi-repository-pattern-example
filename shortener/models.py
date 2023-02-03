@@ -5,7 +5,11 @@ from datetime import datetime
 from sqlalchemy import Column, String, Integer, DateTime
 
 # Own Imports
-from config.database import Base
+from config.database import Base, DATABASE_ENGINE
+
+
+async def create_tables():
+    Link.metadata.create_all(bind=DATABASE_ENGINE)
 
 
 class Link(Base):
@@ -15,7 +19,7 @@ class Link(Base):
     original = Column(String)
     shortened = Column(String(4))
     date_created = Column(DateTime, default=datetime.now)
-    date_modified = Column(datetime, onupdate=datetime.now)
+    date_modified = Column(DateTime, onupdate=datetime.now)
 
     def __str__(cls) -> str:
         """
