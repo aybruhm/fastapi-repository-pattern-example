@@ -40,7 +40,6 @@ async def redirect_to_original_link(code: str) -> str:
 
     :return: The original link is being returned.
     """
-    print("URL Code: ", code)
-
+    
     original_link = await link_repository.get_code(code)
     return original_link.original
