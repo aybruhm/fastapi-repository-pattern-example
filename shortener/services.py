@@ -12,11 +12,11 @@ async def shorten_link() -> str:
 
     :return: A string of 4 random letters.
     """
-    shrt_str = "".join(random.choice(string.ascii_letters, k=4))
+    shrt_str = "".join(random.choice(string.ascii_letters) for i in range(4))
     return shrt_str
 
 
-async def create_shortened_link(original: str) -> Link:
+async def create_shortened_link(base_url: str, original: str) -> Link:
     """
     This function creates a shortened link for the given original link.
 
@@ -25,7 +25,9 @@ async def create_shortened_link(original: str) -> Link:
 
     :return: A Link object
     """
-    
+
     shortened_link = await shorten_link()
-    link = await link_repository.create(original, shortened_link)
+    link = await link_repository.create(
+        original, f"{base_url}{shortened_link}"
+    )
     return link
