@@ -1,6 +1,5 @@
 # FastAPI Imports
-from fastapi import APIRouter, Path
-from fastapi.responses import RedirectResponse
+from fastapi import APIRouter
 
 # Own Imports
 from shortener.schemas import CreateLinkSchema
@@ -27,16 +26,16 @@ async def shorten_url(payload: CreateLinkSchema):
 
 
 @router.get("/{code}/")
-async def redirect_code(code: str = Path()):
+async def redirect_code(code: str):
     """
     This API view takes the shortened link code as a parameter,
     and redirects the user to the original link.
 
-    :param code: str = Path()
+    :param code: str = the shortened code of the original link
     :type code: str
 
-    :return: RedirectResponse(original_link)
+    :return: redirect to original link
     """
 
     original_link = await redirect_to_original_link(code)
-    return RedirectResponse(original_link)
+    return original_link
