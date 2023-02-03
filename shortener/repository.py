@@ -49,5 +49,18 @@ class LinkRepository:
         links = self.db.query(Link).offset(skip).limit(end).all()
         return links
 
+    async def get_code(self, code: str) -> Link:
+        """
+        This method retrieves a link object that matches the code.
+
+        :param code: The shortened code of the link
+        :type code: str
+
+        :return: The link object
+        """
+
+        link = self.db.query(Link).filter_by(shortened=code).first()
+        return link
+
 
 link_repository = LinkRepository()
