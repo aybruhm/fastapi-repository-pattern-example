@@ -15,7 +15,7 @@ class LinkRepository:
     def __init__(self) -> None:
         self.db: Session = get_db().__next__()
 
-    def create(self, original: str, shortened: str) -> Link:
+    async def create(self, original: str, shortened: str) -> Link:
         """
         This method is responsible for creating a new link object.
 
@@ -33,7 +33,7 @@ class LinkRepository:
 
         return link
 
-    def get(self, skip: int, end: int) -> List[Link]:
+    async def get(self, skip: int, end: int) -> List[Link]:
         """
         This method retrieves a list of links objects.
 
