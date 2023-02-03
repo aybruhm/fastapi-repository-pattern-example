@@ -2,6 +2,9 @@
 import random
 import string
 
+# FastAPI Imports
+from fastapi.responses import RedirectResponse
+
 # Own Imports
 from shortener.repository import link_repository, Link
 
@@ -12,6 +15,7 @@ async def shorten_link() -> str:
 
     :return: A string of 4 random letters.
     """
+    
     shrt_str = "".join(random.choice(string.ascii_letters) for i in range(4))
     return shrt_str
 
@@ -42,4 +46,4 @@ async def redirect_to_original_link(code: str) -> str:
     """
     
     original_link = await link_repository.get_code(code)
-    return original_link.original
+    return RedirectResponse(original_link.original)
