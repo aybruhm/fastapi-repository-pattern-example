@@ -1,10 +1,10 @@
 # Stdlib Imports
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 
 
 class BaseLinkSchema(BaseModel):
-    original: str
+    original: HttpUrl
 
 
 class CreateLinkSchema(BaseLinkSchema):
@@ -13,7 +13,7 @@ class CreateLinkSchema(BaseLinkSchema):
 
 class LinkSchema(BaseLinkSchema):
     id: int
-    shortened: str
+    shortened: HttpUrl
     date_created: datetime
 
     class Config:
