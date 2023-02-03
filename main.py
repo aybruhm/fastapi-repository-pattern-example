@@ -6,14 +6,16 @@ from fastapi import FastAPI
 
 # Own Imports
 from shortener.models import create_tables
-from shortener.api_v1 import router as api_router
+from shortener.api_v1 import router as api_v1_router
+from shortener.api_v2 import router as api_v2_router
 
 
 # initialize app
 app = FastAPI(title="URL Shortener")
 
 # Include router(s)
-app.include_router(api_router)
+app.include_router(api_v1_router, prefix="/v1")
+app.include_router(api_v2_router, prefix="/v2")
 
 
 @app.on_event("startup")
