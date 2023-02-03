@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 # Own Imports
 from shortener.models import create_tables
-from shortener.api import router as api_router
+from shortener.api_v1 import router as api_router
 
 
 # initialize app
