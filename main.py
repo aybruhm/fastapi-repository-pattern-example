@@ -13,7 +13,7 @@ app = FastAPI(title="URL Shortener")
 async def root() -> dict:
     """
     Root api view.
-    
+
     :return: dictionary with a message key
     """
     return {"message": "URL Shortener with FastAPI."}
