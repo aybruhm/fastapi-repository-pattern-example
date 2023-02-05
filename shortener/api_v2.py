@@ -1,3 +1,7 @@
+# Stdlib Imports
+import random
+import string
+
 # FastAPI Imports
 from fastapi import APIRouter, Path, Depends
 from fastapi.responses import RedirectResponse
@@ -8,7 +12,6 @@ from sqlalchemy.orm import Session
 # Own Imports
 from config.deps import get_db
 from shortener.models import Link
-from shortener.services import shorten_link
 from shortener.schemas import CreateLinkSchema
 
 
@@ -20,7 +23,9 @@ router = APIRouter(tags=["API v2"])
 async def shorten_url(
     payload: CreateLinkSchema, db: Session = Depends(get_db)
 ):
-    shortened_link = shorten_link()
+    shortened_link = "".join(
+        random.choice(string.ascii_letters) for i in range(4)
+    )
     link = Link(original=payload.original, shortened=shortened_link)
 
     db.add(link)
